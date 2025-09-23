@@ -3,7 +3,7 @@ import { FiSearch, FiMenu, FiX } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import UserIcon from '../../../assets/Images/UserIcon.png';
 import { useSelector } from 'react-redux';
-import { FOUNDATION_BASE_URL, FRONTEND_BASE_URL } from '../../../../frontend/src/utils/constants';
+// import { FOUNDATION_BASE_URL, FRONTEND_BASE_URL } from '../../../../frontend/src/utils/constants';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -20,14 +20,14 @@ const Navbar = () => {
           Use code <span className="font-bold">INFIN10</span> to get 10% off on our shop!
         </div>
         <div className="hidden lg:flex gap-20 pl-4">
-          <Link to={FRONTEND_BASE_URL + "/comics"} className="hover:underline">Comics</Link>
-          <a href={FOUNDATION_BASE_URL} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <Link to="http://localhost:3100/comics" className="hover:underline">Comics</Link>
+          <a href="http://localhost:3100" target="_blank" rel="noopener noreferrer" className="hover:underline">
             Foundation
           </a>
-          <a href={FRONTEND_BASE_URL + "/support-us"} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href="http://localhost:3100/support-us" target="_blank" rel="noopener noreferrer" className="hover:underline">
             Support Us
           </a>
-          <a href={FRONTEND_BASE_URL + "/news"} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href="http://localhost:3100/news" target="_blank" rel="noopener noreferrer" className="hover:underline">
             News and Blogs
           </a>
           {/* ✅ Browse tab added */}
