@@ -1,11 +1,14 @@
 import React from "react";
-import ResearchPlans from "./Research"
+import Paper from "../BrowsePapers/Paper";
+
+// import ResearchPlans from "./Research"
 
 const Home = () => {
   return (
  
     <div>
-      <ResearchPlans/>
+      {/* <ResearchPlans/> */}
+      <Paper/>
     </div>
   
     )

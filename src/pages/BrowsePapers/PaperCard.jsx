@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PaperCard = ({ paper }) => {
   const navigate = useNavigate();
+  console.log(paper)
 
   const handleViewPaper = () => {
     // Navigate to lowercase "readresearch" and pass the paper._id as a URL param
@@ -25,7 +26,7 @@ const PaperCard = ({ paper }) => {
       <div className="flex justify-between items-center mt-4">
         <p className="text-sm text-gray-500">
           {(() => {
-            const date = new Date(paper.datePublished);
+            const date = new Date(paper.publicationDate);
             const day = String(date.getDate()).padStart(2, '0');
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();

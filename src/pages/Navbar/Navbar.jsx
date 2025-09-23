@@ -31,7 +31,7 @@ const Navbar = () => {
             News and Blogs
           </a>
           {/* ✅ Browse tab added */}
-          <Link to="/browseResearch" className="hover:underline">Browse</Link>
+          
         </div>
       </div>
 

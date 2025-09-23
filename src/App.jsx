@@ -52,7 +52,7 @@ useEffect(() => {
       <Route path="/" element={<Home/>} />
       <Route path="ResearchPlans" element={<ResearchPlans/>} />
       <Route path="readresearch/:id" element={<ReadResearch />} />
-      <Route path="/browseResearch" element={<Paper/>} />
+     
       
       </Route>
     </Routes>

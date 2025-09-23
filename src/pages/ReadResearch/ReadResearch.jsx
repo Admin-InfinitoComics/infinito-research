@@ -15,7 +15,7 @@ const ReadResearch = () => {
       try {
         setLoading(true);
         const res = await readResearchService(id);
-        setPaper(res.data);
+        setPaper(res?.data || null); // backend returns data object
       } catch (error) {
         console.error('Failed to fetch research paper:', error);
         setPaper(null);
@@ -27,17 +27,8 @@ const ReadResearch = () => {
     if (id) fetchPaper();
   }, [id]);
 
-  if (loading) {
-    return <p className="text-center py-20">Loading research paper...</p>;
-  }
-
-  if (!paper) {
-    return (
-      <p className="text-center py-20 text-red-500">
-        Research paper not found.
-      </p>
-    );
-  }
+  if (loading) return <p className="text-center py-20">Loading research paper...</p>;
+  if (!paper) return <p className="text-center py-20 text-red-500">Research paper not found.</p>;
 
   return (
     <div className="bg-[#fdfdfd] py-12 px-4 sm:px-6 md:px-10 overflow-x-hidden">
@@ -46,33 +37,25 @@ const ReadResearch = () => {
         {/* Left Content */}
         <div className="w-full lg:w-9/12 text-justify break-words">
           <p className="text-xl text-gray-500 italic mb-1 break-words">
-            <span className="text-red-600 font-semibold">
-              {paper.journalName || 'Journal'}
-            </span>{' '}
-            | {paper.publishedAt ? new Date(paper.publishedAt).toLocaleDateString() : 'N/A'}
+            <span className="text-red-600 font-semibold">{paper.journalName || 'Journal'}</span>{' '}
+            | {paper.publicationDate ? new Date(paper.publicationDate).toLocaleDateString() : 'N/A'}
           </p>
 
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-left break-words">
-            {paper.title}
-          </h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-left break-words">{paper.title}</h1>
 
           {paper.authors?.length > 0 && (
             <p className="text-2xl text-gray-700 font-medium mb-2 text-left break-words">
-              {paper.authors.join(', ')}
+              {paper.authors.map(a => a.name).join(', ')}
             </p>
           )}
 
           <div className="flex gap-10 border-y border-gray-200 py-4 mb-6">
             <div>
-              <p className="text-4xl border-l-4 px-3 border-gray-200 text-red-600 font-bold leading-tight">
-                {paper.citations || 0}
-              </p>
+              <p className="text-4xl border-l-4 px-3 border-gray-200 text-red-600 font-bold leading-tight">{paper.citations || 0}</p>
               <p className="text-sm text-gray-600">Citations</p>
             </div>
             <div>
-              <p className="text-4xl border-l-4 px-3 border-gray-200 text-red-600 font-bold leading-tight">
-                {paper.views || 0}
-              </p>
+              <p className="text-4xl border-l-4 px-3 border-gray-200 text-red-600 font-bold leading-tight">{paper.views || 0}</p>
               <p className="text-sm text-gray-600">Views</p>
             </div>
           </div>
@@ -119,11 +102,6 @@ const ReadResearch = () => {
             </div>
           )}
 
-          {/* Mobile Buy Section */}
-          <div className="block lg:hidden mt-10">
-            <BuyPaperCard price={paper.price} />
-          </div>
-
           {/* References */}
           {paper.references?.length > 0 && (
             <>
@@ -131,9 +109,7 @@ const ReadResearch = () => {
               <ol className="text-sm text-gray-800 list-decimal list-inside space-y-4 break-words">
                 {paper.references.map((ref, i) => (
                   <li key={i} className="break-words">
-                    {typeof ref === 'string'
-                      ? ref
-                      : `${ref.text}${ref.doi ? ` (DOI: ${ref.doi})` : ''}`}
+                    {ref.text}{ref.doi ? ` (DOI: ${ref.doi})` : ''}
                   </li>
                 ))}
               </ol>
@@ -141,7 +117,7 @@ const ReadResearch = () => {
           )}
         </div>
 
-        {/* Desktop Buy Section */}
+        {/* Buy Section */}
         <div className="hidden lg:block w-full lg:w-5/12">
           <BuyPaperCard price={paper.price} />
         </div>
