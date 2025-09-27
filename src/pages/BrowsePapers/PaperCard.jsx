@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const PaperCard = ({ paper }) => {
   const navigate = useNavigate();
-  console.log(paper)
 
   const handleViewPaper = () => {
     // Navigate to lowercase "readresearch" and pass the paper._id as a URL param
@@ -13,7 +12,7 @@ const PaperCard = ({ paper }) => {
   return (
     <div className="bg-white p-7 mb-6 w-full">
       <h2 className="text-[1.35rem] font-semibold">{paper.title}</h2>
-      <p className="text-[#DD2626] mb-1 text-lg">{paper.journalName}</p>
+      <p className="text-[#DD2626] mb-1 text-lg">{paper.authors.affiliation}</p>
       <p className="text-sm mb-2">
         {paper.authors && Array.isArray(paper.authors)
           ? paper.authors.join(', ')

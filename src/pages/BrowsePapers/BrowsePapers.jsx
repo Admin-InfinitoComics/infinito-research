@@ -15,6 +15,18 @@ const BrowsePapers = ({ allPapers, isLoading }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [filteredPapers, setFilteredPapers] = useState([]);
 
+  // Updated categories to match backend
+  const categories = [
+    'all',
+    'Business',
+    'Psychology',
+    'Design',
+    'Technology',
+    'Humanities',
+    'Communities',
+    'Philosophy'
+  ];
+
   useEffect(() => {
     if (!Array.isArray(allPapers)) return;
     const filtered = allPapers.filter((paper) => {
@@ -56,8 +68,6 @@ const BrowsePapers = ({ allPapers, isLoading }) => {
     }
   };
 
-  const categories = ['all', 'business', 'psychology', 'design', 'development'];
-
   return (
     <div className="w-full min-h-screen bg-gray-100 flex justify-center overflow-hidden">
       <div className="flex flex-col min-h-screen w-2/3">
@@ -93,7 +103,7 @@ const BrowsePapers = ({ allPapers, isLoading }) => {
                       : 'border-transparent hover:border-black text-gray-700'
                   }`}
                 >
-                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                  {cat}
                 </button>
               ))}
             </div>

@@ -19,7 +19,7 @@ const PaperSearchBar = ({
     <div className="w-full bg-gray-100  py-6 ">
       <div className="flex flex-col">
         <h2 className="text-2xl sm:text-3xl font-bold text-[#202020] mb-6 tracking-wide uppercase">
-          Search for Papers
+          Search for Ongoing Research Papers
         </h2>
 
 

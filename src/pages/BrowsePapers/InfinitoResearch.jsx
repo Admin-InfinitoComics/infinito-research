@@ -64,7 +64,8 @@ const InfinitoCarousel = ({ researchPaper, isLoading }) => {
           </div>
 
           <p className="text-sm lg:text-[0.875rem] max-w-md">
-            One day Spiderman ate a spider, he choked on it, he died. You think that’s the end. NAAAAH!!!
+            Infinito Research & Development fuels innovation in storytelling by integrating AI, ABM in AVGC-XR industry, and emerging technologies. We focus on building scalable solutions that power growth across comics, animation, games, future technologies and immersive media.
+            
           </p>
         </div>
 
