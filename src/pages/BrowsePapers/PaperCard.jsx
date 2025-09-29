@@ -5,19 +5,32 @@ const PaperCard = ({ paper }) => {
   const navigate = useNavigate();
 
   const handleViewPaper = () => {
-    // Navigate to lowercase "readresearch" and pass the paper._id as a URL param
     navigate(`/readresearch/${paper._id}`);
   };
 
   return (
     <div className="bg-white p-7 mb-6 w-full">
       <h2 className="text-[1.35rem] font-semibold">{paper.title}</h2>
-      <p className="text-[#DD2626] mb-1 text-lg">{paper.authors.affiliation}</p>
-      <p className="text-sm mb-2">
+      {/* Show all authors with name and affiliation */}
+      <div className="mb-1 text-lg">
+        {Array.isArray(paper.authors) && paper.authors.length > 0 && (
+          <div className="flex flex-wrap gap-x-6 gap-y-1">
+            {paper.authors.map((author, idx) => (
+              <span key={idx} className="text-[#DD2626]">
+                {author.name}
+                {author.affiliation ? `, ${author.affiliation}` : ""}
+                {idx < paper.authors.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+      {/* Optionally, you can remove the next <p> if not needed */}
+      {/* <p className="text-sm mb-2">
         {paper.authors && Array.isArray(paper.authors)
-          ? paper.authors.join(', ')
+          ? paper.authors.map(a => a.name).join(', ')
           : paper.authors}
-      </p>
+      </p> */}
       <p className="text-sm text-[#000000] line-clamp-2 border-[#BAB7B7] border-l-4 pl-2 mt-4 whitespace-pre-wrap">
         {paper.abstract}
       </p>

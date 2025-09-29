@@ -17,7 +17,7 @@ const BrowsePapers = ({ allPapers, isLoading }) => {
 
   // Updated categories to match backend
   const categories = [
-    'all',
+    'All',
     'Business',
     'Psychology',
     'Design',
@@ -69,7 +69,7 @@ const BrowsePapers = ({ allPapers, isLoading }) => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gray-100 flex justify-center overflow-hidden">
+    <div className="w-full min-h-screen bg-gray-100 flex justify-center" style={{ overflow: "visible" }}>
       <div className="flex flex-col min-h-screen w-2/3">
 
         {/* Search Bar */}
@@ -112,9 +112,8 @@ const BrowsePapers = ({ allPapers, isLoading }) => {
 
         {/* Paper Cards Section */}
         <div
-          className={`w-full h-[calc(100vh-150px)] ${
-            isLoading ? 'overflow-hidden' : 'overflow-y-auto'
-          } pr-2 pt-8 pb-20`}
+          className="w-full pt-8 pb-20" // removed h-[calc(100vh-150px)] and overflow-y-auto
+          style={{ overflow: "visible", maxHeight: "none" }}
         >
           <div className="flex flex-col">
             {isLoading ? (

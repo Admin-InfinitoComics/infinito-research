@@ -128,10 +128,7 @@ const ReadResearch = () => {
           )}
 
           <div className="flex gap-10 border-y border-gray-200 py-4 mb-6">
-            <div>
-              <p className="text-4xl border-l-4 px-3 border-gray-200 text-red-600 font-bold leading-tight">{paper.citations || 0}</p>
-              <p className="text-sm text-gray-600">Citations</p>
-            </div>
+           
             <div>
               <p className="text-4xl border-l-4 px-3 border-gray-200 text-red-600 font-bold leading-tight">{paper.views || 0}</p>
               <p className="text-sm text-gray-600">Views</p>
@@ -181,6 +178,20 @@ const ReadResearch = () => {
             </div>
           )}
 
+          {/* References always visible below Get Full Access */}
+          {paper.references?.length > 0 && (
+            <>
+              <h2 className="text-xl font-semibold mb-3 mt-10 text-left">References</h2>
+              <ol className="text-sm text-gray-800 list-decimal list-inside space-y-4 break-words">
+                {paper.references.map((ref, i) => (
+                  <li key={i} className="break-words">
+                    {ref.text}{ref.doi ? ` (DOI: ${ref.doi})` : ''}
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
+
           {/* Show full content only if unlocked */}
           {isUnlocked && (
             <>
@@ -219,19 +230,6 @@ const ReadResearch = () => {
                   <p className="text-gray-800 leading-relaxed break-words">{paper.conclusion}</p>
                 </>
               )}
-              {/* References */}
-              {paper.references?.length > 0 && (
-                <>
-                  <h2 className="text-xl font-semibold mb-3 mt-10 text-left">References</h2>
-                  <ol className="text-sm text-gray-800 list-decimal list-inside space-y-4 break-words">
-                    {paper.references.map((ref, i) => (
-                      <li key={i} className="break-words">
-                        {ref.text}{ref.doi ? ` (DOI: ${ref.doi})` : ''}
-                      </li>
-                    ))}
-                  </ol>
-                </>
-              )}
             </>
           )}
         </div>
@@ -263,26 +261,76 @@ const BuyPaperCard = ({ price, handleUnlock, isUnlocked, razorpayLoaded, signedP
 
   return (
     <div className="p-6 sm:p-10 shadow-xl rounded-sm bg-white">
-      <h3 className="text-lg font-semibold mb-6">Buy Paper Now</h3>
-      <p className="text-2xl font-medium mb-4">₹{price || '49.00'}</p>
-      {!isUnlocked ? (
-        <button
-          className="border border-black px-4 py-2 text-sm font-semibold tracking-wide hover:bg-black hover:text-white transition"
-          onClick={handleUnlock}
-          disabled={!razorpayLoaded}
-        >
-          {razorpayLoaded ? "Get Full Access >" : "Loading Payment..."}
-        </button>
-      ) : (
-        <button
-          className="border border-black px-4 py-2 text-sm font-semibold tracking-wide hover:bg-black hover:text-white transition"
-          onClick={handleDownload}
-          disabled={!signedPdfUrl}
-        >
-          Download PDF
-        </button>
-      )}
-    </div>
+  <h3 className="text-lg font-semibold mb-6">Buy Paper Now</h3>
+  <p className="text-2xl font-medium mb-4">₹{price || '49.00'}</p>
+
+  {/* Membership Benefits */}
+  <h4 className="text-lg font-semibold mb-4">Membership Benefits</h4>
+  <ul className="space-y-4">
+    <li>
+      <p className="text-red-600 font-semibold uppercase text-sm tracking-wide">
+        Unlimited Reading &gt;
+      </p>
+      <p className="text-gray-600 text-sm">
+        Explore All Our Research, Insights, And Findings
+      </p>
+    </li>
+    <li>
+      <p className="text-red-600 font-semibold uppercase text-sm tracking-wide">
+        Download PDFs &gt;
+      </p>
+      <p className="text-gray-600 text-sm">
+        Access Offline Copies Anytime, Anywhere
+      </p>
+    </li>
+    <li>
+      <p className="text-red-600 font-semibold uppercase text-sm tracking-wide">
+        Contribute in Research &gt;
+      </p>
+      <p className="text-gray-600 text-sm">
+        The Description Of The Plan. How To Use It, Is It Available
+      </p>
+    </li>
+    <li>
+      <p className="text-red-600 font-semibold uppercase text-sm tracking-wide">
+        Early Access &gt;
+      </p>
+      <p className="text-gray-600 text-sm">
+        Be The First To Explore New Studies And Innovations
+      </p>
+    </li>
+    <li>
+      <p className="text-red-600 font-semibold uppercase text-sm tracking-wide">
+        Exclusive Updates &gt;
+      </p>
+      <p className="text-gray-600 text-sm">
+        Stay Informed With The Latest Breakthroughs In AI, AR/VR, And Future Tech
+      </p>
+    </li>
+  </ul>
+
+  {/* Action Button */}
+  <div className="mt-6">
+    {!isUnlocked ? (
+      <button
+        className="border border-black px-4 py-2 text-sm font-semibold tracking-wide hover:bg-black hover:text-white transition"
+        onClick={handleUnlock}
+        disabled={!razorpayLoaded}
+      >
+        {razorpayLoaded ? "Get Full Access >" : "Loading Payment..."}
+      </button>
+    ) : (
+      <button
+        className="border border-black px-4 py-2 text-sm font-semibold tracking-wide hover:bg-black hover:text-white transition"
+        onClick={handleDownload}
+        disabled={!signedPdfUrl}
+      >
+        Download PDF
+      </button>
+    )}
+  </div>
+</div>
+
   );
 };
 

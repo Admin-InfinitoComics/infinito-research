@@ -74,9 +74,9 @@ const InfinitoCarousel = ({ researchPaper, isLoading }) => {
           <h2 className="text-xl lg:text-[1.875rem] font-bold mb-2 line-clamp-2">
             {researchPaper[currentIndex].title}
           </h2>
-          <p className="text-[#515151] text-base lg:text-[1.375rem] mb-3">
+          {/* <p className="text-[#515151] text-base lg:text-[1.375rem] mb-3">
             {researchPaper[currentIndex].authors?.join(", ")}
-          </p>
+          </p> */}
           <div className="border-l-4 border-[#BAB7B7] pl-3 text-sm text-gray-800 mb-4 line-clamp-5">
             {researchPaper[currentIndex].abstract}
           </div>
