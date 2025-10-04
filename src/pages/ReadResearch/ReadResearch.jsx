@@ -29,7 +29,9 @@ const ReadResearch = () => {
       const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:4500";
       const requestUrl = `${backendUrl}/research-papers/${id}/pdf`;
       console.log("Requesting signed PDF URL:", requestUrl);
-      const res = await axios.get(requestUrl);
+      const res = await axios.get(requestUrl, {
+        withCredentials: true // Enable cookies to be sent with request
+      });
       setSignedPdfUrl(res.data.url);
     } catch (err) {
       // Enhanced error logging and user message

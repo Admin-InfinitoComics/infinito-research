@@ -1,6 +1,15 @@
 import axios from 'axios';
 import { BACKEND_URL } from '../utils/constants';
 
+// Create axios instance with credentials support
+const axiosInstance = axios.create({
+  baseURL: BACKEND_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true, // Enable cookies to be sent with all requests
+});
+
 /**
  * Fetch a specific research paper by its ID.
  * Automatically increments the paper's view count (handled by backend).
@@ -14,7 +23,7 @@ export const readResearchService = async (paperId) => {
   }
 
   try {
-    const { data } = await axios.get(`${BACKEND_URL}/research-papers/${paperId}`);
+    const { data } = await axiosInstance.get(`/research-papers/${paperId}`);
     console.log("Fetched research paper:", data);
     return data;
   } catch (error) {
